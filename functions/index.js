@@ -23,18 +23,17 @@ exports.sendNotificationToTopicComments = functions.firestore.document('comments
     const name = event.after.get('nameUser');
     const solit = event.after.get('solit');
     const idPost = event.after.get('idPost')
-    await admin.firestore().collection('list').doc(`${idPost}`).update({
-        notificationDate: (new Date()).setMilliseconds()
+    await admin.firestore().collection('list/').doc(`${idPost}`).update({
+        notificationDate: Number(admin.firestore.Timestamp.now().toMillis())
     })
-    
     var message = {
         notification: {
-            title:`${name} - ${LIST.data().title}`,
-            body: solit ? `Nueva solicitud: ${body}`: `Nuevo comentario: ${body}`
+            title: `${name} - ${LIST.data().title}`,
+            body: solit ? `Nueva solicitud: ${body}` : `Nuevo comentario: ${body}`
         },
         topic: 'medical',
     }
-
     return admin.messaging().send(message);
+
 });
 
