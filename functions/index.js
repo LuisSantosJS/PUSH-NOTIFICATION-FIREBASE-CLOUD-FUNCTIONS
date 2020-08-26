@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-exports.sendNotificationToTopic = functions.firestore.document('list/{mUid}').onWrite(async (event) => {
+exports.sendNotificationToTopic = functions.firestore.document('notification/{mUid}').onWrite(async (event) => {
 
     const title = event.after.get('title');
     const body = event.after.get('description');
@@ -22,10 +22,7 @@ exports.sendNotificationToTopicComments = functions.firestore.document('comments
     const body = event.after.get('comment');
     const name = event.after.get('nameUser');
     const solit = event.after.get('solit');
-    const idPost = event.after.get('idPost')
-    // await admin.firestore().collection('list/').doc(`${idPost}`).update({
-    //     notificationDate: Number(admin.firestore.Timestamp.now().toMillis())
-    // })
+    // const idPost = event.after.get('idPost')
     var message = {
         notification: {
             title: `${name} - ${LIST.data().title}`,
