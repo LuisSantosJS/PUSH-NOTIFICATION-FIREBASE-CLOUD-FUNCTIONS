@@ -23,9 +23,9 @@ exports.sendNotificationToTopicComments = functions.firestore.document('comments
     const name = event.after.get('nameUser');
     const solit = event.after.get('solit');
     const idPost = event.after.get('idPost')
-    await admin.firestore().collection('list/').doc(`${idPost}`).update({
-        notificationDate: Number(admin.firestore.Timestamp.now().toMillis())
-    })
+    // await admin.firestore().collection('list/').doc(`${idPost}`).update({
+    //     notificationDate: Number(admin.firestore.Timestamp.now().toMillis())
+    // })
     var message = {
         notification: {
             title: `${name} - ${LIST.data().title}`,
