@@ -9,8 +9,8 @@ exports.sendNotificationToTopic = functions.firestore.document('list/{mUid}').on
 
     var message = {
         notification: {
-            title: `Nueva tarea: ${title}`,
-            body: body
+            title: title === undefined ? 'Tarea eliminada' : `Nueva tarea: ${title}`,
+            body: title === undefined ? 'Tarea eliminada' : body
         },
         topic: 'medical',
     }
