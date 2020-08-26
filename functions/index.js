@@ -5,12 +5,12 @@ exports.sendNotificationToTopic = functions.firestore.document('list/{mUid}').on
 
     const title = event.after.get('title');
     const body = event.after.get('description');
-    const data = event.after.get('dates');
+    // const data = event.after.get('dates');
 
     var message = {
         notification: {
-            title: 'nueva tarea',
-            body: title
+            title: `Nueva tarea: ${title}`,
+            body: body
         },
         topic: 'medical',
     }
