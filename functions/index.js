@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-exports.sendNotificationToTopic = functions.firestore.document('notification/{mUid}').onWrite(async (event) => {
+exports.sendNotificationToTopic = functions.firestore.document('list/{mUid}').onWrite(async (event) => {
 
     const title = event.after.get('title');
     const body = event.after.get('description');
