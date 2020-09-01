@@ -25,7 +25,7 @@ exports.sendNotificationToTopicComments = functions.firestore.document('comments
     const LIST = await admin.firestore().collection('list/').doc(`${idPost}`).get()
     var message = {
         notification: {
-            title: `${LIST.data().title}`,
+            title: `Nuevo comentario`,
             body: solit ? `Nueva solicitud: ${body}` : `Nuevo comentario: ${body}`
         },
         topic: 'medical',
