@@ -20,13 +20,12 @@ exports.sendNotificationToTopic = functions.firestore.document('list/{mUid}').on
 
 exports.sendNotificationToTopicComments = functions.firestore.document('comments/{mUid}').onWrite(async (event) => {
     const body = event.after.get('comment');
-    const name = event.after.get('nameUser');
     const solit = event.after.get('solit');
-    const idPost = event.after.get('idPost')
+    const idPost = event.after.get('postID')
     const LIST = await admin.firestore().collection('list/').doc(`${idPost}`).get()
     var message = {
         notification: {
-            title: `${name} - ${LIST.data().title}`,
+            title: `${LIST.data().title}`,
             body: solit ? `Nueva solicitud: ${body}` : `Nuevo comentario: ${body}`
         },
         topic: 'medical',
